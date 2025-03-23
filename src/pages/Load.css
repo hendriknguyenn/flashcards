@@ -1,0 +1,21 @@
+#left-pane {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px black;
+    padding: 10px;
+}
+
+#right-pane {
+    border: 3px black;
+    margin-top: 50px;
+    padding: 10px;
+}
+#right-pane button{
+    display: block;
+}
+
+#top-pane {
+    border: 3px black;
+    padding: 10px;
+}
