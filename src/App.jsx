@@ -4,15 +4,33 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Deck from './pages/Deck.tsx';
 import Home from './pages/Home';
 import Load from './pages/Load.tsx';
+import New from './pages/New.tsx';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App(){
   const [showHome, setShowHome] = useState(true);
   const [showLoad, setShowLoad] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+  const [showBackHome, setShowBackHome] = useState(false);
+  
   function handleLoadDeck(){
     setShowHome(false);
     setShowLoad(true);
+    setShowNew(false);
+    setShowBackHome(true);
+  }
+  function handleNewDeck(){
+    setShowHome(false);
+    setShowLoad(false);
+    setShowNew(true);
+    setShowBackHome(true);
+  }
+  function handleBackHome(){
+    setShowHome(true);
+    setShowLoad(false);
+    setShowNew(false);
+    setShowBackHome(false);
   }
   return ( 
     <BrowserRouter>
@@ -20,7 +38,7 @@ function App(){
         <div>{showHome ? 
           <div>
             <Home /> 
-            <button>Create a New Deck</button>
+            <button onClick={handleNewDeck}>Create a New Deck</button>
             <button onClick={handleLoadDeck}>Manage/Load Deck</button>
           </div> : ""}
         </div>
@@ -29,15 +47,16 @@ function App(){
             <Load />
           </div> : "" }
         </div>
+        <div>{showNew ?
+          <div>
+            <New />    
+          </div> : ""}
+        </div>
+        {showBackHome ? <button onClick={handleBackHome}>Back to Home Page</button> : ""}
       </>
     </BrowserRouter>
   );
 }
-
-//<div className = "home_buttons">
-//<button onClick={handleCreateNewDeck}>Create a New Deck</button>
-//<button onClick={handleLoadDeck}>Manage/Load Decks</button>
-//</div>
 
 export default App;
 

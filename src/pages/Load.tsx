@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './Load.css';
+import data from './../data/data.json';
 
 function Load(){
+    //get deck names from data.json
+    //const deck_list = JSON.parse(data);
     let header = "Load Deck";
     let deck_list = ["Deck #1", "Deck #2", "Deck #3", "Deck #4"];
 
@@ -18,7 +21,9 @@ function Load(){
                             <h2>Decklist</h2>
                             {deck_list.map((item, index) => 
                                 <li
-                                className = {selectedDeck === index ? "list-group-item active" : "list-group-item"} key={item}>
+                                className = {selectedDeck === index ? "list-group-item active" : "list-group-item"} 
+                                onClick={() => setSelectedDeck(index)}
+                                key={item}>
                                 {item}    
                                 </li>
                             )}
