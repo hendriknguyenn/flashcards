@@ -5,10 +5,12 @@ import data from './../data/data.json';
 
 function Load(){
     //get deck names from data.json
-    //const deck_list = JSON.parse(data);
+    let deck_list: string[] = new Array();
+    for(let i=0; i<data.length;i++){
+        deck_list.push(data[i].deck_name);
+    }
     let header = "Load Deck";
-    let deck_list = ["Deck #1", "Deck #2", "Deck #3", "Deck #4"];
-
+    
     //hook for selected deck
     const [selectedDeck, setSelectedDeck] = useState(0);
     return(

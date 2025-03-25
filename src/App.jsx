@@ -38,8 +38,8 @@ function App(){
         <div>{showHome ? 
           <div>
             <Home /> 
-            <button onClick={handleNewDeck}>Create a New Deck</button>
-            <button onClick={handleLoadDeck}>Manage/Load Deck</button>
+            <button className="home_buttons" onClick={handleNewDeck}>Create a New Deck</button>
+            <button className="home_buttons" onClick={handleLoadDeck}>Manage/Load Deck</button>
           </div> : ""}
         </div>
         <div>{showLoad ?
@@ -52,7 +52,7 @@ function App(){
             <New />    
           </div> : ""}
         </div>
-        {showBackHome ? <button onClick={handleBackHome}>Back to Home Page</button> : ""}
+        {showBackHome ? <button className="home_buttons" onClick={handleBackHome}>Back to Home Page</button> : ""}
       </>
     </BrowserRouter>
   );
