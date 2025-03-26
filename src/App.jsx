@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route } from "react-router-dom";
-import Deck from './pages/Deck.tsx';
-import Home from './pages/Home';
-import Load from './pages/Load.tsx';
-import New from './pages/New.tsx';
+import Deck from './components/DeckPage.tsx';
+import Home from './components/Home.jsx';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Details from './components/Details.tsx';
 
 function App(){
   const [showHome, setShowHome] = useState(true);
@@ -44,12 +43,12 @@ function App(){
         </div>
         <div>{showLoad ?
           <div>
-            <Load />
+            <Details detail_type='list' header='Load a Deck' list_header='Deck List'/>
           </div> : "" }
         </div>
         <div>{showNew ?
           <div>
-            <New />    
+            <Details detail_type='new' header='Create a Deck' list_header='Question List'/>    
           </div> : ""}
         </div>
         {showBackHome ? <button className="home_buttons" onClick={handleBackHome}>Back to Home Page</button> : ""}

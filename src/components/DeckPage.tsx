@@ -1,8 +1,5 @@
 import React, {useState} from "react";
-interface DeckProps {
-    questions: string[];
-}
-function Deck() {
+function DeckPage() {
     let heading = "Quiz #1";
     let questions = new Map([
         [1, "What is the state capitol of California?"],
@@ -41,4 +38,4 @@ function Deck() {
     )
 }
 
-export default Deck;
+export default DeckPage;
