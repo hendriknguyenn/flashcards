@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route } from "react-router-dom";
 import Deck from './components/DeckPage.tsx';
@@ -13,6 +13,24 @@ function App(){
   const [showNew, setShowNew] = useState(false);
   const [showBackHome, setShowBackHome] = useState(false);
   
+  //temp function to test backend
+  const [users, setUsers] = useState(false);
+  
+  function getUsers() {
+    fetch('http://localhost:3001')
+    .then(response => {
+      return response.text();
+    })
+    .then(data => {
+      setUsers(data);
+    });
+  }
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+// ==============================
+
   function handleLoadDeck(){
     setShowHome(false);
     setShowLoad(true);
@@ -34,6 +52,9 @@ function App(){
   return ( 
     <BrowserRouter>
       <>
+      <div>
+        {users ? users : 'There is no user data to show'}
+      </div>
         <div>{showHome ? 
           <div>
             <Home /> 
@@ -55,6 +76,7 @@ function App(){
       </>
     </BrowserRouter>
   );
+
 }
 
 export default App;
