@@ -17,7 +17,7 @@ function App(){
   const [users, setUsers] = useState(false);
   
   function getUsers() {
-    fetch('http://localhost:3001')
+    fetch('http://localhost:3001', {mode: 'no-cors'})
     .then(response => {
       return response.text();
     })
