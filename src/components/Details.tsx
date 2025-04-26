@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Deck from './Deck.tsx';
 import './../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './Details.css';
 

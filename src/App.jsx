@@ -1,34 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route } from "react-router-dom";
-import Deck from './components/DeckPage.tsx';
-import Home from './components/Home.jsx';
+import { BrowserRouter} from "react-router-dom";
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import Details from './components/Details.tsx';
+import DeckList from './components/DeckList.tsx';
+
 
 function App(){
   const [showHome, setShowHome] = useState(true);
   const [showLoad, setShowLoad] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showBackHome, setShowBackHome] = useState(false);
-  
-  //temp function to test backend
-  const [users, setUsers] = useState(false);
-  
-  function getUsers() {
-    fetch('http://localhost:3001', {mode: 'no-cors'})
-    .then(response => {
-      return response.text();
-    })
-    .then(data => {
-      setUsers(data);
-    });
-  }
 
-  useEffect(() => {
-    getUsers();
-  }, []);
 // ==============================
 
   function handleLoadDeck(){
@@ -51,10 +33,21 @@ function App(){
   }
   return ( 
     <BrowserRouter>
-      <>
-      <div>
-        {users ? users : 'There is no user data to show'}
-      </div>
+    <h1>hi</h1>
+    {/* ROUTES */}
+    <div>
+      <DeckList />
+    </div>
+    </BrowserRouter>
+  );
+
+
+}
+
+export default App;
+
+/**
+ <BrowserRouter>
         <div>{showHome ? 
           <div>
             <Home /> 
@@ -73,11 +66,11 @@ function App(){
           </div> : ""}
         </div>
         {showBackHome ? <button className="home_buttons" onClick={handleBackHome}>Back to Home Page</button> : ""}
-      </>
+
+        <div>
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+          </Routes>
+        </div>
     </BrowserRouter>
-  );
-
-}
-
-export default App;
-
+ */

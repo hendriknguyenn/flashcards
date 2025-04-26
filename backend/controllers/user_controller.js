@@ -31,4 +31,22 @@ export const create = (req, res) => {
         });
       });
 };
+
+// Retrieve all Users
+export const findAll = (req, res) => {
+  // Allow a filter condition via query parameter
+  const username = req.query.username;
+  const condition = username ? {username: {[Op.like]: `%${username}%`}} : null;
+ 
+  User.findAll({where: condition})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+              err.message || "Some error occurred while retrieving Users."
+        });
+      });
+};
  

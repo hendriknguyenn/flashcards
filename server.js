@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
-import db from "./models/index.js";
-import userRoutes from "./routes/user_routes.js";
+import db from "./backend/models/index.js";
+import userRoutes from "./backend/routes/user_routes.js";
+import deckRoutes from "./backend/routes/deck_routes.js";
 
 const app = express();
 const corsOptions = {
@@ -16,6 +17,8 @@ app.get("/", (req, res) => {
   res.json({ message: "My flashcard app"});
 });
 
+//userRoutes(app);
+deckRoutes(app);
 // Sync the database
 db.sequelize.sync().then(() => {
   console.log("Synced db.");
