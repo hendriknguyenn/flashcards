@@ -12,9 +12,6 @@ export default (app) => {
   // Retrieve all Deck
   router.get("/", deck.findAll);
 
-  //test
-  router.get("/test", deck.test)
-
   app.use('/api/decks', router);
 
 };

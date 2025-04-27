@@ -34,11 +34,9 @@ export const create = (req, res) => {
 
 // Retrieve all Users
 export const findAll = (req, res) => {
-  // Allow a filter condition via query parameter
-  const username = req.query.username;
-  const condition = username ? {username: {[Op.like]: `%${username}%`}} : null;
- 
-  User.findAll({where: condition})
+  User.findAll({
+    attributes: ['username', 'password'],
+  })
       .then(data => {
         res.send(data);
       })
@@ -48,5 +46,28 @@ export const findAll = (req, res) => {
               err.message || "Some error occurred while retrieving Users."
         });
       });
+};
+
+// Retrieve a single User based on username
+export const findByUsername = (req, res) => {
+  const username = req.params.username;
+  User.findAll({
+    attributes: ['user_id','username', 'password'],
+    where: {username: username}
+  })
+  .then((data) => {
+    if(data) {
+      res.send(data);
+    } else {
+      res.status(404).send({
+        message: `User with id=${username} does not exist.`,
+      });
+    }
+  })
+  .catch((err) => {
+    res.status(500).send({
+      message: "Some error occurred while retrieving User.",
+    });
+  })
 };
  

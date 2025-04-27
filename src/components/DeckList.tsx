@@ -1,6 +1,10 @@
 import { React, useState, useEffect } from 'react';
 import DeckService from "../services/deck_service";
 
+interface Props{
+    currentUserId: number;
+}
+
 function DeckList(){
     const [decks, setDecks] = useState([]);
     

@@ -49,11 +49,4 @@ export const findAll = (req, res) => {
         });
       });
 };
-
-export const test = (req, res) => {
-  res.status(400).send({
-    message:
-        'this is a test message'
-  })
-};
  

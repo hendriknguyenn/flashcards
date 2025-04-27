@@ -17,8 +17,8 @@ app.get("/", (req, res) => {
   res.json({ message: "My flashcard app"});
 });
 
-//userRoutes(app);
 deckRoutes(app);
+userRoutes(app);
 // Sync the database
 db.sequelize.sync().then(() => {
   console.log("Synced db.");

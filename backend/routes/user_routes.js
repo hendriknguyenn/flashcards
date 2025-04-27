@@ -10,6 +10,9 @@ export default (app) => {
   // Retrieve all User 
   router.get("/", user.findAll);
 
+  // Retrieve a single User based on ID
+  router.get("/:username", user.findByUsername)
+
   app.use('/api/users', router);
 
 };
