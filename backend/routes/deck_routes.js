@@ -12,6 +12,9 @@ export default (app) => {
   // Retrieve all Deck
   router.get("/", deck.findAll);
 
+  // Retrieve decks based on user ID
+  router.get("/:user_id", deck.findUserDecks)
+
   app.use('/api/decks', router);
 
 };

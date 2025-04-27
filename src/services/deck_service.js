@@ -12,6 +12,10 @@ const http = axios.create({
     },
 });
 
+const getUserDecks = (user_id) => {
+    return http.get(`/decks/${user_id}`);
+};
+
 const getAllDecks = () => {
     return http.get("/decks");
 };
@@ -23,4 +27,5 @@ const create = (data) => {
 export default {
     getAllDecks,
     create,
+    getUserDecks,
 };

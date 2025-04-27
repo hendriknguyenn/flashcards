@@ -9,11 +9,11 @@ import DeckList from './components/DeckList.tsx';
 function App(){
   const [component, setComponent] = useState("home");
   const [currentUserId, setCurrentUserId] = useState(0);
+
   return ( 
     <BrowserRouter>
     <div>
-      {component === "home" ? <Home currentUserId={currentUserId} setCurrentUser={setCurrentUserId}/> : null}
-      {console.log("Current User ID:" + currentUserId)}
+      {component === "home" ? <Home currentUserId={currentUserId} setCurrentUser={setCurrentUserId} setComponent={setComponent}/> : null}
       {component === "decklist" ? <DeckList currentUserId={currentUserId}/> : null}
     </div>
     </BrowserRouter>

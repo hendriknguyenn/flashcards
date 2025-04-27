@@ -2,37 +2,39 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import appLogo from '../assets/flashcard.svg';
 import UserService from '../services/user_service';
 import res from "express/lib/response";
-
-interface Props{
-  currentUserId: number;
-  //setCurrentUserId: 
-}
 /**
  * 
  * @returns User login screen
  */
-function Home(prop: Props){
-
+function Home({setCurrentUser, setComponent}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isValid, setValidLogin] = useState(false);
+
   /**
    * gets all the users in the database and runs a check against username/password until match found
    * this can be improved
    */
-  const handleLogin = () => {
+  function handleLogin(){
     UserService.getUser(username)
       .then((response) => {
-        let server_data = response.data[0];
-        if (server_data.username == username){
-          if(server_data.password == password){
-            console.log("User successfully logged in");
-            //prop.setCurrentUserId(server_data.user_id);
+        // if response is undefined then user doesn't exist
+        if(response.data[0]){
+          console.log("ENTERED");
+          let server_data = response.data[0];
+          if (server_data.username == username){
+            if(server_data.password == password){
+              setCurrentUser(server_data.user_id);
+              console.log("User successfully logged in.");
+              //redirect to new page by calling passed prop function
+              setComponent("decklist");
+            } else {
+              console.log("empty password field");
+            }
           } else {
-            console.log("Invalid Login Info");
+            console.log("empty username field");
           }
         } else {
-          console.log("Invalid Login Info");
+          console.log("User does not exist");
         }
       })
       .catch((e) => {
@@ -40,6 +42,18 @@ function Home(prop: Props){
       })
   }
 
+  function createUser(){
+    //check if username exists\
+    const data = {username: username, password: password}
+    UserService.create(data)
+    .then((response) => {
+      console.log(response.data);
+      //setComponent("decklist");
+    })
+    .catch((e) => {
+      console.log(e);
+    })
+  }
 
   return(
       <>
@@ -59,7 +73,7 @@ function Home(prop: Props){
                 <input type="text" onChange={(e) => setPassword(e.target.value)} value={password}></input>
                 <br></br>
                 <input type="submit" value="Login" formAction={handleLogin}></input>
-                <input type="submit" value="Create User"></input>
+                <input type="submit" value="Create User" onClick={createUser}></input>
               </form>
         </div>  
       </>

@@ -1,4 +1,4 @@
-import { DataTypes, STRING } from "sequelize";
+import { DataTypes } from "sequelize";
 export default (sequelize, Sequelize) => {
     const Deck = sequelize.define("deck", {
       deck_id: {

@@ -35,18 +35,34 @@ export const create = (req, res) => {
 // Retrieve all Deck
 export const findAll = (req, res) => {
   Deck.findAll({
-    //TODO: change owner_id to current logged on user_id
-    where: {owner_id: 1,},
     attributes: ['deck_id', 'deck_name'],
   })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-              err.message || "Some error occurred while retrieving Deck."
-        });
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+            err.message || "Some error occurred while retrieving Deck."
       });
+    });
 };
+
+//Retrieve all Decks that belong to a User
+export const findUserDecks = (req, res) => {
+  const user_id = req.params.user_id;
+  Deck.findAll({
+    where: {owner_id: user_id,},
+    attributes: ['deck_id', 'deck_name'],
+  })
+    .then(data => {
+      res.send(data);
+    }) 
+    .catch(err => {
+      res.status(500).send({
+        message:
+            err.message || "Some error occurred while retrieving Deck."
+      });
+    });
+}
  
