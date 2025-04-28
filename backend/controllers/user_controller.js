@@ -5,7 +5,6 @@ const User = db.users;
  
 // Create and Save a new User
 export const create = (req, res) => {
-  console.log("CREATE CALLED");
   // Validate request
   if (!req.body.username || !req.body.password) {
     res.status(400).send({

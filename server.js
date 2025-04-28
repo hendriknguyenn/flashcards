@@ -3,6 +3,7 @@ import cors from "cors";
 import db from "./backend/models/index.js";
 import userRoutes from "./backend/routes/user_routes.js";
 import deckRoutes from "./backend/routes/deck_routes.js";
+import questionRoutes from "./backend/routes/question_routes.js";
 
 const app = express();
 const corsOptions = {
@@ -19,6 +20,8 @@ app.get("/", (req, res) => {
 
 deckRoutes(app);
 userRoutes(app);
+questionRoutes(app);
+
 // Sync the database
 db.sequelize.sync().then(() => {
   console.log("Synced db.");

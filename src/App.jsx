@@ -4,17 +4,20 @@ import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home.tsx';
 import DeckList from './components/DeckList.tsx';
+import QuestionList from './components/QuestionList.tsx';
 
 
 function App(){
   const [component, setComponent] = useState("home");
   const [currentUserId, setCurrentUserId] = useState(0);
+  const [currentDeckId, setCurrentDeckId] = useState(0);
 
   return ( 
     <BrowserRouter>
     <div>
       {component === "home" ? <Home currentUserId={currentUserId} setCurrentUser={setCurrentUserId} setComponent={setComponent}/> : null}
-      {component === "decklist" ? <DeckList currentUserId={currentUserId}/> : null}
+      {component === "decklist" ? <DeckList currentUserId={currentUserId} setComponent={setComponent} setCurrentDeckId={setCurrentDeckId}/> : null}
+      {component === "questionlist" ? <QuestionList deck_id={currentDeckId} setComponent={setComponent}/>: null}
     </div>
     </BrowserRouter>
   );

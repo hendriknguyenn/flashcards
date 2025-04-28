@@ -64,5 +64,5 @@ export const findUserDecks = (req, res) => {
             err.message || "Some error occurred while retrieving Deck."
       });
     });
-}
+};
  
