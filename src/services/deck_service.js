@@ -24,8 +24,13 @@ const create = (data) => {
     return http.post("/decks", data);
 };
 
+const remove = (id) => {
+    return http.delete(`/decks/${id}`);
+}
+
 export default {
     getAllDecks,
     create,
     getUserDecks,
+    remove,
 };

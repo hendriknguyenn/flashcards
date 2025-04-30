@@ -10,6 +10,10 @@ export default (app) => {
   // Retrieve all questions based on deck ID
   router.get("/:deck_id", question.findAllById)
 
+  router.post("/", question.addQuestion)
+
+  router.delete("/:question_id", question.deleteQuestion)
+
   app.use('/api/questions', router);
 
 };

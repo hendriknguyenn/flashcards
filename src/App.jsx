@@ -5,6 +5,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home.tsx';
 import DeckList from './components/DeckList.tsx';
 import QuestionList from './components/QuestionList.tsx';
+import Flashcard from './components/Flashcard.tsx';
 
 
 function App(){
@@ -16,8 +17,9 @@ function App(){
     <BrowserRouter>
     <div>
       {component === "home" ? <Home currentUserId={currentUserId} setCurrentUserId={setCurrentUserId} setComponent={setComponent}/> : null}
-      {component === "decklist" ? <DeckList currentUserId={currentUserId} setComponent={setComponent} setCurrentDeckId={setCurrentDeckId} setCurrentUserId={setCurrentUserId}/> : null}
+      {component === "decklist" ? <DeckList currentUserId={currentUserId} setComponent={setComponent} setCurrentDeckId={setCurrentDeckId} setCurrentUserId={setCurrentUserId} currentDeckId={currentDeckId}/> : null}
       {component === "questionlist" ? <QuestionList deck_id={currentDeckId} setComponent={setComponent}/>: null}
+      {component === "flashcard" ? <Flashcard/> : null}
     </div>
     </BrowserRouter>
   );

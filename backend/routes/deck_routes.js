@@ -13,7 +13,10 @@ export default (app) => {
   router.get("/", deck.findAll);
 
   // Retrieve decks based on user ID
-  router.get("/:user_id", deck.findUserDecks)
+  router.get("/:user_id", deck.findUserDecks);
+
+  // Delete a Deck
+  router.delete("/:deck_id", deck.deleteDeck);
 
   app.use('/api/decks', router);
 
