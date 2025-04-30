@@ -1,11 +1,14 @@
 import { React, useState, useEffect } from 'react';
 import DeckService from "../services/deck_service";
 import './../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { response } from 'express';
 
-function DeckList({currentUserId, setComponent, setCurrentDeckId}){
+function DeckList({currentUserId, setComponent, setCurrentDeckId, setCurrentUserId}){
     const [decks, setDecks] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const [isSelected, setSelected] = useState(true);
+    const [showDeckCreation, setShowDeckCreation] = useState(false);
+    const [newDeckName, setNewDeckName] = useState("");
 
     
     /**
@@ -35,6 +38,23 @@ function DeckList({currentUserId, setComponent, setCurrentDeckId}){
         }
     }
 
+    function handleNewDeck(){
+        DeckService.create({deck_name: newDeckName, owner_id: currentUserId})
+        .then((response) => {
+            console.log(response.data);
+            setCurrentDeckId(response.data.deck_id);
+            setComponent("questionlist")
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+    }
+
+    function handleLogout(){
+        setComponent("home");
+        setCurrentUserId(-1);
+    }
+
     //Get list of decks from database
     useEffect(() => {
         retrieveDecks();
@@ -54,7 +74,19 @@ function DeckList({currentUserId, setComponent, setCurrentDeckId}){
                 )}
             </ul>
             <button disabled={isSelected} onClick={() => setComponent("questionlist")}>Select</button>
-            <button onClick={() => setComponent("home")}>Log out</button>
+            <button onClick={() => setShowDeckCreation(true)}>New Deck</button>
+            <button disabled={selectedIndex===-1}>Edit Deck</button>
+            <button>Delete</button>
+            <button onClick={handleLogout}>Log out</button>
+            <br></br>
+            {showDeckCreation ? 
+            <div>
+                <form id="new deck">
+                    <label>Deck Name:</label>
+                    <input type="text" onChange={(e) => setNewDeckName(e.target.value)}></input>
+                    <input type="button" value="Create Deck" onClick={handleNewDeck}/>
+                </form>
+            </div> : null}
         </div>
     );
 }

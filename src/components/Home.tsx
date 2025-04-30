@@ -6,7 +6,7 @@ import res from "express/lib/response";
  * 
  * @returns User login screen
  */
-function Home({setCurrentUser, setComponent}) {
+function Home({setCurrentUserId, setComponent}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,7 +22,7 @@ function Home({setCurrentUser, setComponent}) {
           let server_data = response.data[0];
           if (server_data.username == username){
             if(server_data.password == password){
-              setCurrentUser(server_data.user_id);
+              setCurrentUserId(server_data.user_id);
               console.log("User successfully logged in.");
               //redirect to new page by calling passed prop function
               setComponent("decklist");
@@ -50,7 +50,7 @@ function Home({setCurrentUser, setComponent}) {
       UserService.create({username: username, password: password})
         .then((response) => {
           console.log(response.data);
-          setCurrentUser(response.data.user_id);
+          setCurrentUserId(response.data.user_id);
           setComponent("decklist");
         })
         .catch((e) => {

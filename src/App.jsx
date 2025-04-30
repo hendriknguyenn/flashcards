@@ -15,8 +15,8 @@ function App(){
   return ( 
     <BrowserRouter>
     <div>
-      {component === "home" ? <Home currentUserId={currentUserId} setCurrentUser={setCurrentUserId} setComponent={setComponent}/> : null}
-      {component === "decklist" ? <DeckList currentUserId={currentUserId} setComponent={setComponent} setCurrentDeckId={setCurrentDeckId}/> : null}
+      {component === "home" ? <Home currentUserId={currentUserId} setCurrentUserId={setCurrentUserId} setComponent={setComponent}/> : null}
+      {component === "decklist" ? <DeckList currentUserId={currentUserId} setComponent={setComponent} setCurrentDeckId={setCurrentDeckId} setCurrentUserId={setCurrentUserId}/> : null}
       {component === "questionlist" ? <QuestionList deck_id={currentDeckId} setComponent={setComponent}/>: null}
     </div>
     </BrowserRouter>

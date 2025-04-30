@@ -2,7 +2,9 @@ import { DataTypes } from "sequelize";
 export default (sequelize, Sequelize) => {
     const Deck = sequelize.define("deck", {
       deck_id: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
       },
       owner_id: {
         type: DataTypes.INTEGER
@@ -10,6 +12,8 @@ export default (sequelize, Sequelize) => {
       deck_name: {
         type: DataTypes.STRING
       }
+    }, { 
+      timestamps: false, 
     });
     return Deck;
   };
