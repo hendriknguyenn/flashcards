@@ -19,7 +19,7 @@ export const create = (req, res) => {
   };
  
   // Save User in the database
-  User.create(user)
+  const test = User.create(user)
       .then(data => {
         res.send(data);
       })
