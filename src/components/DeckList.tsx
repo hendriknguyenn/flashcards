@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from 'react';
 import DeckService from "../services/deck_service";
-import './../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { response } from 'express';
 import res from 'express/lib/response';
 
@@ -81,7 +80,7 @@ function DeckList({currentUserId, setComponent, setCurrentDeckId, setCurrentUser
                     >{deck.deck_name}</li>
                 )}
             </ul>
-            <button disabled={selectedIndex===-1} onClick={() => setComponent("questionlist")}>Select</button>
+            <button disabled={selectedIndex===-1} onClick={() => setComponent("flashcard")}>Select</button>
             <button onClick={() => setShowDeckCreation(true)}>New Deck</button>
             <button disabled={selectedIndex===-1} onClick={() => setComponent("questionlist")}>Edit Deck</button>
             <button disabled={selectedIndex===-1} onClick={handleDelete}>Delete</button>

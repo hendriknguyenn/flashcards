@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter} from "react-router-dom";
 import './App.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home.tsx';
 import DeckList from './components/DeckList.tsx';
 import QuestionList from './components/QuestionList.tsx';
@@ -19,7 +18,7 @@ function App(){
       {component === "home" ? <Home currentUserId={currentUserId} setCurrentUserId={setCurrentUserId} setComponent={setComponent}/> : null}
       {component === "decklist" ? <DeckList currentUserId={currentUserId} setComponent={setComponent} setCurrentDeckId={setCurrentDeckId} setCurrentUserId={setCurrentUserId} currentDeckId={currentDeckId}/> : null}
       {component === "questionlist" ? <QuestionList deck_id={currentDeckId} setComponent={setComponent}/>: null}
-      {component === "flashcard" ? <Flashcard/> : null}
+      {component === "flashcard" ? <Flashcard deck_id={currentDeckId} setComponent={setComponent}/> : null}
     </div>
     </BrowserRouter>
   );

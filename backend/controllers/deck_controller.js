@@ -66,6 +66,23 @@ export const findUserDecks = (req, res) => {
     });
 };
 
+export const findDeckName = (req, res) => {
+  const deck_id = req.params.deck_id;
+  console.log("DECK ID:" + deck_id);
+  Deck.findByPk(deck_id)
+  .then(data => {
+    if(data){
+      res.send(data);
+    }
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving Deck name."
+    })
+  });
+};
+
 export const deleteDeck = (req, res) => {
   const deck_id = req.params.deck_id;
   Deck.destroy({
@@ -85,7 +102,6 @@ export const deleteDeck = (req, res) => {
     res.status(500).send({
       message: "Could not delete Deck"
     })
-  })
-  
-}
+  });
+};
  

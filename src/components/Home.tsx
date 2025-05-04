@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import appLogo from '../assets/flashcard.svg';
 import UserService from '../services/user_service';
-import res from "express/lib/response";
+import tailwindcss from "@tailwindcss/vite";
 /**
  * 
  * @returns User login screen
@@ -75,7 +75,7 @@ function Home({setCurrentUserId, setComponent}) {
   }
   return(
       <>
-        <div>
+        <div className="flex flex-wrap">
           <h1>Flashcards</h1>
               <h4>A React-Vite Application by Hendrik Nguyen</h4>
               <div>

@@ -12,6 +12,10 @@ const http = axios.create({
     },
 });
 
+const getDeckNameFromId = (deck_id) => {
+    return http.get(`/decks/name/${deck_id}`);
+};
+
 const getUserDecks = (user_id) => {
     return http.get(`/decks/${user_id}`);
 };
@@ -24,13 +28,14 @@ const create = (data) => {
     return http.post("/decks", data);
 };
 
-const remove = (id) => {
-    return http.delete(`/decks/${id}`);
-}
+const remove = (id, data) => {
+    return http.delete(`/decks/${id}`, data);
+};
 
 export default {
     getAllDecks,
     create,
     getUserDecks,
     remove,
+    getDeckNameFromId,
 };

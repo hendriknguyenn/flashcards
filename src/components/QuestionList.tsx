@@ -1,10 +1,13 @@
 import { React, useEffect, useState} from 'react';
 import QuestionService from '../services/question_service';
+import DeckService from '../services/deck_service';
 
 function QuestionList({deck_id, setComponent}){
 
     const [questions, setQuestions] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState(-1);
+    const [deckName, setDeckName] = useState("");
+    const [deckNameText, setDeckNameText] = useState();
     const [questionText, setQuestionText] = useState("");
     const [answerText, setAnswerText] = useState("");
     const [currentQuestionId, setCurrentQuestionId] = useState(-1);
@@ -26,9 +29,17 @@ function QuestionList({deck_id, setComponent}){
         if (index == selectedIndex){
             setSelectedIndex(-1);
             setCurrentQuestionId(-1);
+            // handle case when edit details form is shown but user de-selects
+            if(showDetails=="edit"){
+                setShowDetails("");
+            }else{
+                setShowDetails("edit");
+            }
+
         } else {
             setSelectedIndex(index);
             setCurrentQuestionId(question_id);
+            setShowDetails("");
         }
     }
 
@@ -40,6 +51,7 @@ function QuestionList({deck_id, setComponent}){
             retrieveQuestions();
             setQuestionText("");
             setAnswerText("");
+            setShowDetails("");
             console.log(response.data);
         })
         .catch((e) => {
@@ -47,8 +59,30 @@ function QuestionList({deck_id, setComponent}){
         })
     }
 
-    function handleEdit(){
+    function prepareEdit(){
+        const question = questions.at(selectedIndex);
+        setQuestionText(question.question);
+        setAnswerText(question.answer);
+        setShowDetails("edit")
+    }
 
+    function handleEdit(){
+        const question_data = {
+            deck_id: deck_id,
+            question: questionText,
+            answer: answerText,
+        }
+        QuestionService.updateQuestion(currentQuestionId, question_data)
+        .then((response) => {
+            retrieveQuestions();
+            setQuestionText("");
+            setAnswerText("");
+            setShowDetails("");
+            console.log(response.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }
 
     function handleDelete(){
@@ -71,13 +105,21 @@ function QuestionList({deck_id, setComponent}){
     }
 
     useEffect(() => {
-            retrieveQuestions();
-        }, []);
+        retrieveQuestions();
+        DeckService.getDeckNameFromId(deck_id)
+            .then((response) => {
+                console.log(response.data + deck_id);
+                setDeckName(response.data.deck_name);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     return(
         <div>
             <h1>Question List</h1>
-            <h3>Deck ID: {deck_id}</h3>
+            <h3>Deck Name: {deckName}</h3>
             <ul className="list-group">
                 {questions.map((question, index) => 
                     <li 
@@ -89,7 +131,7 @@ function QuestionList({deck_id, setComponent}){
             </ul>
             <div>
                 <button disabled={showDetails =="edit"} onClick={() => setShowDetails("add")}>Add</button>
-                <button disabled={selectedIndex==-1 || showDetails=="add"} onClick={() => setShowDetails("edit")}>Edit</button>
+                <button disabled={selectedIndex==-1 || showDetails=="add"} onClick={prepareEdit}>Edit</button>
                 <button disabled={selectedIndex==-1} onClick={handleDelete}>Delete</button>
                 <button onClick={() => setComponent("decklist")}>Return</button>
             </div>
@@ -102,7 +144,7 @@ function QuestionList({deck_id, setComponent}){
                         <label>Answer:</label>
                         <input type="text" value={answerText} onChange={(e) => setAnswerText(e.target.value)}/>
                         <br></br>
-                        <input type="button" value="Enter" onClick={handleAdd}></input>
+                        <input type="button" value="Enter" onClick={showDetails === "add" ? handleAdd : handleEdit}></input>
                         <input type="button" value="Cancel" onClick={handleCancel}></input>
                     </form>
                 </div>

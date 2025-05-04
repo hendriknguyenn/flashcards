@@ -84,3 +84,27 @@ export const deleteQuestion = (req, res) => {
     })
   })
 } 
+
+export const updateQuestion = (req, res) => {
+  const id = req.params.question_id;
+  console.log(req.body);
+  Question.update(req.body, {
+    where: {question_id: id},
+  })
+  .then((num) => {
+    if (num ===1) {
+      res.send({
+        message: "Question was updated succesfully"
+      })
+    } else {
+      res.send({
+          message: `Cannot update Question with id=${id}. Maybe Question was not found or req.body is empty!`,
+      });
+    }
+  })
+  .catch((err) => {
+    res.status(500).send({
+        message: "Error updating Question with id=" + id,
+    });
+  });
+}

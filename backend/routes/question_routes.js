@@ -14,6 +14,8 @@ export default (app) => {
 
   router.delete("/:question_id", question.deleteQuestion)
 
+  router.put("/:question_id", question.updateQuestion)
+
   app.use('/api/questions', router);
 
 };

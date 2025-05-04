@@ -18,6 +18,9 @@ export default (app) => {
   // Delete a Deck
   router.delete("/:deck_id", deck.deleteDeck);
 
+  // Get a Deck Name from deck ID
+  router.get("/name/:deck_id", deck.findDeckName);
+
   app.use('/api/decks', router);
 
 };
