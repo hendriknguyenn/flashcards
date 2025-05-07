@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+
+@theme{
+    --color-light-blue: oklch(173, 216, 230);
+}
+
+h1{
+    text-align: center;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    user-select: none;
+}
+
+h2{
+    text-align: center;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    user-select: none;
+}
+
+label{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    user-select: none;
+}
+
+#home-buttons{
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+}

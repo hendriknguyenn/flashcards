@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter} from "react-router-dom";
-import './App.css';
+import './styles/App.css';
 import Home from './components/Home.tsx';
 import DeckList from './components/DeckList.tsx';
 import QuestionList from './components/QuestionList.tsx';
 import Flashcard from './components/Flashcard.tsx';
+import "tailwindcss";
 
 
 function App(){

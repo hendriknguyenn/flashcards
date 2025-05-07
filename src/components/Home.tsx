@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import appLogo from '../assets/flashcard.svg';
 import UserService from '../services/user_service';
 import tailwindcss from "@tailwindcss/vite";
+import '../styles/Home.css';
 /**
  * 
  * @returns User login screen
@@ -49,7 +50,6 @@ function Home({setCurrentUserId, setComponent}) {
     if (isValid()){
       UserService.create({username: username, password: password})
         .then((response) => {
-          console.log(response.data);
           setCurrentUserId(response.data.user_id);
           setComponent("decklist");
         })
@@ -74,27 +74,44 @@ function Home({setCurrentUserId, setComponent}) {
     return valid;
   }
   return(
-      <>
-        <div className="flex flex-wrap">
-          <h1>Flashcards</h1>
-              <h4>A React-Vite Application by Hendrik Nguyen</h4>
-              <div>
-                <a href="https://github.com/hendriknguyenn/flashcards" target="_blank">
-                  <img src={appLogo} className="logo" alt="Flashcards Logo" />
-                </a>
-              </div>
-              <form id="login">
-                <label>Username:</label>
-                <input type="text" onChange={(e) => setUsername(e.target.value)} value={username}></input>
-                <br></br>
-                <label>Password:</label>
-                <input type="text" onChange={(e) => setPassword(e.target.value)} value={password}></input>
-                <br></br>
-                <input type="button" value="Login" onClick={handleLogin}></input>
-                <input type="button" value="Create User" onClick={createUser}></input>
-              </form>
-        </div>  
-      </>
+    <>
+    <div className= "flex min-h-screen min-w-screen flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h1>Flashcards</h1>
+        <h2>A React Application by Hendrik Nguyen</h2>
+        <a href="https://github.com/hendriknguyenn/flashcards" target="_blank">
+          <img className="mx-auto h-50 w-auto" src={appLogo} alt="Flashcards Logo" />
+        </a>
+      </div>
+
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form className="space-y-6">
+          <div>
+            <label className="block text-xl/10 font-large text-gray-900">Username</label>
+            <div className="mt-2">
+              <input type="text" onChange={(e) => setUsername(e.target.value)} value={username} className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"></input>
+            </div>
+          </div>
+          
+          <div>
+            <label id="home-label" className="block text-xl/10 font-large text-gray-900">Password:</label>
+            <div className="mt-2">
+              <input type="text" onChange={(e) => setPassword(e.target.value)} value={password} className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"></input>
+            </div>
+          </div>
+
+          <div id="home-buttons">
+            <span>
+              <input type="button" value="Login" onClick={handleLogin} className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"></input>
+            </span>
+            <span>
+              <input type="button" value="Create User" onClick={createUser} className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"></input>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+    </>
   )
 }
 

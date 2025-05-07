@@ -2,6 +2,8 @@ import { React, useState, useEffect } from 'react';
 import DeckService from "../services/deck_service";
 import { response } from 'express';
 import res from 'express/lib/response';
+import tailwindcss from '@tailwindcss/vite';
+import '../styles/DeckList.css';
 
 function DeckList({currentUserId, setComponent, setCurrentDeckId, setCurrentUserId, currentDeckId}){
     const [decks, setDecks] = useState([]);
@@ -69,15 +71,19 @@ function DeckList({currentUserId, setComponent, setCurrentDeckId, setCurrentUser
 
     return (
         <div>
-            <h1>Deck List</h1>
+            <h1 className="bg-sky-500 hover:bg-sky-700 ...">Deck List</h1>
             <h4>Current User: {currentUserId}</h4>
-            <ul className="list-group">
+            <ul className="list-none">
                 {decks.map((deck, index) => 
-                    <li 
+                    <li>
+                        <button 
                         key={deck.deck_id}
-                        className={selectedIndex === index ? "list-group-item active" : "list-group-item"}
+                        className={selectedIndex === index ? "bg-blue-100" : "bg-black-100"}
                         onClick={() => handleDeckSelection(index, deck.deck_id)}
-                    >{deck.deck_name}</li>
+                    >
+                        {deck.deck_name}
+                    </button>
+                    </li>
                 )}
             </ul>
             <button disabled={selectedIndex===-1} onClick={() => setComponent("flashcard")}>Select</button>

@@ -50,11 +50,13 @@ export const findAll = (req, res) => {
 // Retrieve a single User based on username
 export const findByUsername = (req, res) => {
   const username = req.params.username;
+  console.log("username:" + username);
   User.findAll({
     attributes: ['user_id','username', 'password'],
     where: {username: username}
   })
   .then((data) => {
+    console.log(data);
     if(data) {
       res.send(data);
     } else {
