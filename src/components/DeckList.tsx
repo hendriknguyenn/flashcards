@@ -70,35 +70,40 @@ function DeckList({currentUserId, setComponent, setCurrentDeckId, setCurrentUser
     }, []);
 
     return (
-        <div>
-            <h1 className="bg-sky-500 hover:bg-sky-700 ...">Deck List</h1>
-            <h4>Current User: {currentUserId}</h4>
-            <ul className="list-none">
-                {decks.map((deck, index) => 
-                    <li>
-                        <button 
-                        key={deck.deck_id}
-                        className={selectedIndex === index ? "bg-blue-100" : "bg-black-100"}
-                        onClick={() => handleDeckSelection(index, deck.deck_id)}
-                    >
-                        {deck.deck_name}
-                    </button>
-                    </li>
-                )}
-            </ul>
-            <button disabled={selectedIndex===-1} onClick={() => setComponent("flashcard")}>Select</button>
-            <button onClick={() => setShowDeckCreation(true)}>New Deck</button>
-            <button disabled={selectedIndex===-1} onClick={() => setComponent("questionlist")}>Edit Deck</button>
-            <button disabled={selectedIndex===-1} onClick={handleDelete}>Delete</button>
-            <button onClick={handleLogout}>Log out</button>
+        <div className="flex flex-col min-h-screen min-w-screen justify-center">
+            <div id='deck-headers'>
+                <h1>Deck List</h1>
+                <h2>Current User: {currentUserId}</h2>
+            </div>
+            <div>
+                <ul role="list">
+                    {decks.map((deck, index) => 
+                        <li key={deck.deck_id}
+                            className={selectedIndex === index ? "bg-blue-100" : "bg-black-100"}
+                            onClick={() => handleDeckSelection(index, deck.deck_id)}
+                        >
+                            {deck.deck_name}
+                            
+                        </li>
+                    )}
+                </ul>
+            </div>
+            <div id='deck-buttons' className="flex flex-row min-w-screen">
+                <button disabled={selectedIndex===-1} onClick={() => setComponent("flashcard")}>Select</button>
+                <button onClick={() => setShowDeckCreation(true)}>New Deck</button>
+                <button disabled={selectedIndex===-1} onClick={() => setComponent("questionlist")}>Edit Deck</button>
+                <button disabled={selectedIndex===-1} onClick={handleDelete}>Delete</button>
+                <button onClick={handleLogout}>Log out</button>
+            </div>
+            
             <br></br>
             {showDeckCreation ? 
-            <div>
-                <form id="new deck">
+            <div id='deck-new' className="flex flex-row">
+                <form>
                     <label>Deck Name:</label>
                     <input type="text" onChange={(e) => setNewDeckName(e.target.value)}></input>
-                    <input type="button" value="Create Deck" onClick={handleNew}/>
-                    <input type="button" value="Cancel" onClick={() => setShowDeckCreation(false)}/>
+                    <input id='new-deck-input' type="button" value="Create Deck" onClick={handleNew}/>
+                    <input id='new-deck-input' type="button" value="Cancel" onClick={() => setShowDeckCreation(false)}/>
                 </form>
             </div> : null}
         </div>

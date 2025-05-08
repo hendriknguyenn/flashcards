@@ -118,18 +118,22 @@ function QuestionList({deck_id, setComponent}){
 
     return(
         <div>
-            <h1>Question List</h1>
-            <h3>Deck Name: {deckName}</h3>
-            <ul className="list-group">
-                {questions.map((question, index) => 
-                    <li 
-                        key={question.question_id}
-                        className={selectedIndex === index ? "list-group-item active" : "list-group-item"}
-                        onClick={() => handleQuestionSelection(index, question.question_id)}
-                    >{question.question}</li>
-                )}
-            </ul>
             <div>
+                <h1>Question List</h1>
+                <h2>Deck Name: {deckName}</h2>
+            </div>
+            <div>
+                <ul className="list-group">
+                    {questions.map((question, index) => 
+                        <li 
+                            key={question.question_id}
+                            className={selectedIndex === index ? "bg-blue-100" : "bg-black-100"}
+                            onClick={() => handleQuestionSelection(index, question.question_id)}
+                        >{question.question}</li>
+                    )}
+                </ul>
+            </div>
+            <div className="flex flex-row">
                 <button disabled={showDetails =="edit"} onClick={() => setShowDetails("add")}>Add</button>
                 <button disabled={selectedIndex==-1 || showDetails=="add"} onClick={prepareEdit}>Edit</button>
                 <button disabled={selectedIndex==-1} onClick={handleDelete}>Delete</button>
