@@ -1,28 +1,55 @@
 @import 'tailwindcss';
 
 @theme{
-    --color-light-blue: oklch(173, 216, 230);
 }
 
-h1{
-    text-align: center;
+* {
+    color:azure;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #40444A;
+}
+#home-header{
+    align-content: center;
+}
+
+#home-input{
+    border: 1px solid azure;
+    border-radius: 15px;
+    min-height: 50px;
+    min-width: 400px;
+    padding: 10px;
+}
+
+#header{
+    text-align: center;
     user-select: none;
+    color:azure;
+    font-size: 48px;
+    
 }
 
 h2{
     text-align: center;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     user-select: none;
 }
 
-label{
+#home-label{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     user-select: none;
+    font-size: 30px;
 }
 
 #home-buttons{
     display: flex;
-    padding: 10px;
-    justify-content: space-between;
+    flex-direction: row;
+}
+input[type=button]:hover{
+    transform: scale(1.1);
+    background-color: ligh;
+}
+
+input[type=button]{
+    min-width: 200px;
+    background-color: white;
+    color: black;
 }

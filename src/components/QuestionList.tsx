@@ -78,6 +78,7 @@ function QuestionList({deck_id, setComponent}){
             setQuestionText("");
             setAnswerText("");
             setShowDetails("");
+            setSelectedIndex(-1);
             console.log(response.data);
         })
         .catch((err) => {
@@ -117,7 +118,7 @@ function QuestionList({deck_id, setComponent}){
     }, []);
 
     return(
-        <div>
+        <div className='flex flex-col min-h-screen min-w-screen'>
             <div>
                 <h1>Question List</h1>
                 <h2>Deck Name: {deckName}</h2>

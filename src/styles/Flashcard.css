@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+#container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: fit-content;
+}
+
+#flashcard{
+    min-height: 300px;
+    font-size: 26px;
+}
+
+text{
+    color: white;
+}
+
+button{
+    background-color: gray;
+}

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import QuestionService from '../services/question_service';
 import DeckService from '../services/deck_service';
+import '../styles/Flashcard.css'
 
 function Flashcard({deck_id, setComponent}){
 
@@ -70,14 +71,18 @@ function Flashcard({deck_id, setComponent}){
   }, []);
 
   return ( 
-    <div>
+    <div className="min-h-screen min-w-screen ">
+      <div id="container">
         <h1>Deck Name: {deck_name} </h1>
-        <button onClick={() => handleFlashcardFlip()}>{getFlashcardText()}</button>
+        <button id="flashcard" onClick={() => handleFlashcardFlip()}>{getFlashcardText()}</button>
         <br></br>
-        <button onClick={() => handleIndexCounter("dec")}>Previous</button>
-        <button onClick={() => handleIndexCounter("inc")}>Next</button>
+        <div id='flashcard-buttons' className='flex flex-row justify-center'>
+          <button onClick={() => handleIndexCounter("dec")}>Previous</button>
+          <button onClick={() => handleIndexCounter("inc")}>Next</button>
+        </div>
         <br></br>
-        <button onClick={() => setComponent("decklist")}>Return</button>
+        <button className='max-w-100'onClick={() => setComponent("decklist")}>Return</button>
+      </div>
     </div>
   );
 }

@@ -70,16 +70,16 @@ function DeckList({currentUserId, setComponent, setCurrentDeckId, setCurrentUser
     }, []);
 
     return (
-        <div className="flex flex-col min-h-screen min-w-screen justify-center">
+        <div className="grid min-h-screen min-w-screen justify-center">
             <div id='deck-headers'>
                 <h1>Deck List</h1>
                 <h2>Current User: {currentUserId}</h2>
             </div>
-            <div>
+            <div id='deck-list'>
                 <ul role="list">
                     {decks.map((deck, index) => 
-                        <li key={deck.deck_id}
-                            className={selectedIndex === index ? "bg-blue-100" : "bg-black-100"}
+                        <li id="list-element" key={deck.deck_id}
+                            className={selectedIndex === index ? "selected" : "unselected"}
                             onClick={() => handleDeckSelection(index, deck.deck_id)}
                         >
                             {deck.deck_name}
@@ -88,17 +88,19 @@ function DeckList({currentUserId, setComponent, setCurrentDeckId, setCurrentUser
                     )}
                 </ul>
             </div>
-            <div id='deck-buttons' className="flex flex-row min-w-screen">
-                <button disabled={selectedIndex===-1} onClick={() => setComponent("flashcard")}>Select</button>
-                <button onClick={() => setShowDeckCreation(true)}>New Deck</button>
-                <button disabled={selectedIndex===-1} onClick={() => setComponent("questionlist")}>Edit Deck</button>
-                <button disabled={selectedIndex===-1} onClick={handleDelete}>Delete</button>
-                <button onClick={handleLogout}>Log out</button>
+            <div id='deck-button-container'>
+                <div className='flex flex-row'>
+                    <button id='deck-button' disabled={selectedIndex===-1} onClick={() => setComponent("flashcard")}>Select</button>
+                    <button id='deck-button' onClick={() => setShowDeckCreation(true)}>New Deck</button>
+                    <button id='deck-button' disabled={selectedIndex===-1} onClick={() => setComponent("questionlist")}>Edit Deck</button>
+                    <button id='deck-button' disabled={selectedIndex===-1} onClick={handleDelete}>Delete</button>
+                    <button id='deck-button' onClick={handleLogout}>Log out</button>
+                </div>
             </div>
             
             <br></br>
             {showDeckCreation ? 
-            <div id='deck-new' className="flex flex-row">
+            <div id='new-deck-container' className="flex flex-row">
                 <form>
                     <label>Deck Name:</label>
                     <input type="text" onChange={(e) => setNewDeckName(e.target.value)}></input>

@@ -1,42 +1,52 @@
 @import "tailwindcss";
 
-@theme {
-    --font-display: "Satoshi", "sans-serif";
+.selected{
+    background-color: gray;
 }
 
 input[type=button]{
-    border:1px;
+    border: 1px;
     border-color:gray;
-    background-color: lightgray;
     border-radius: 15px;
     padding: 10px;
     margin-right: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#list-element:hover{
+    border-color: gray;
+    background-color: gray;
+}
+
+#list-element{
+    border-color: white;
 }
 
 #deck-headers{
-    display: flex;
+    display: grid;
+    grid-area: 1 / 1 / span 1 / span 3;
     justify-content: left;
-    flex-direction: column;
+}
+#deck-list{
+    display: grid;
+    grid-area: 2 / 1 / span 4 / span 5;
+}
+#deck-button-container{
+    display: grid;
+    grid-area: 7 / 1 / span 1 / span 3;
+}
+#new-deck-container{
+    display:grid;
+    grid-area: 6 / 1 / span 1 / span 3;
 }
 
-#deck-buttons > button{
-
+#deck-button {
+    min-width: 100px;
+    color: black;
 }
 
 button + button{
     margin-left: 15px;
-}
-
-h1{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    user-select: none;
-    text-align: left;
-}
-
-h2{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    user-select: none;
-    text-align: left;
 }
 
 li{
