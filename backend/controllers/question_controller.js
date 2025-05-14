@@ -61,6 +61,31 @@ export const addQuestion = (req, res) => {
   })
 }
 
+// needed to delete deck, must delete all records with the foreign key first
+export const deleteDeckQuestions = (req, res) => {
+  const deck_id = req.params.deck_id;
+  Question.destroy({
+    where: {deck_id: deck_id},
+  })
+  .then((num) => {
+    if (num === 1) {
+      res.send({
+        message: "Deck questions were deleted succesfully."
+      })
+    } else {
+      res.send({
+        message: `Cannot delete questions from Deck with id=${deck_id}. Possibly deck does not exist.`
+      })
+    }
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while deleting Questions"
+    })
+  })
+}
+
 export const deleteQuestion = (req, res) => {
   const question_id = req.params.question_id;
   Question.destroy({

@@ -23,9 +23,14 @@ const updateQuestion = (question_id, data) => {
     return http.put(`/questions/${question_id}`, data)
 }
 
+const deleteQuestionsFromDeck = (deck_id) => {
+    return http.delete(`/questions/deck/${deck_id}`)
+}
+
 export default {
     getDeckQuestions,
     addQuestion,
     deleteQuestion,
     updateQuestion,
+    deleteQuestionsFromDeck,
 }

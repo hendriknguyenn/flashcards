@@ -1,6 +1,7 @@
 import { React, useEffect, useState} from 'react';
 import QuestionService from '../services/question_service';
 import DeckService from '../services/deck_service';
+import "../styles/QuestionList.css";
 
 function QuestionList({deck_id, setComponent}){
 
@@ -32,8 +33,6 @@ function QuestionList({deck_id, setComponent}){
             // handle case when edit details form is shown but user de-selects
             if(showDetails=="edit"){
                 setShowDetails("");
-            }else{
-                setShowDetails("edit");
             }
 
         } else {
@@ -128,14 +127,14 @@ function QuestionList({deck_id, setComponent}){
                     {questions.map((question, index) => 
                         <li 
                             key={question.question_id}
-                            className={selectedIndex === index ? "bg-blue-100" : "bg-black-100"}
+                            className={selectedIndex === index ? "selected" : "unselected"}
                             onClick={() => handleQuestionSelection(index, question.question_id)}
                         >{question.question}</li>
                     )}
                 </ul>
             </div>
             <div className="flex flex-row">
-                <button disabled={showDetails =="edit"} onClick={() => setShowDetails("add")}>Add</button>
+                <button disabled={selectedIndex !=-1 || showDetails =="edit"} onClick={() => setShowDetails("add")}>Add</button>
                 <button disabled={selectedIndex==-1 || showDetails=="add"} onClick={prepareEdit}>Edit</button>
                 <button disabled={selectedIndex==-1} onClick={handleDelete}>Delete</button>
                 <button onClick={() => setComponent("decklist")}>Return</button>
@@ -144,10 +143,10 @@ function QuestionList({deck_id, setComponent}){
                 <div>
                     <form id="question">
                         <label>Question:</label>
-                        <input type="text" value={questionText} onChange={(e) => setQuestionText(e.target.value)}/>
+                        <input id="input-text" type="text" value={questionText} onChange={(e) => setQuestionText(e.target.value)}/>
                         <br></br>
                         <label>Answer:</label>
-                        <input type="text" value={answerText} onChange={(e) => setAnswerText(e.target.value)}/>
+                        <input id="input-text" type="text" value={answerText} onChange={(e) => setAnswerText(e.target.value)}/>
                         <br></br>
                         <input type="button" value="Enter" onClick={showDetails === "add" ? handleAdd : handleEdit}></input>
                         <input type="button" value="Cancel" onClick={handleCancel}></input>

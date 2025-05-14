@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+    --text-medium: 20px;
+}
+
 .selected{
     background-color: gray;
 }
@@ -16,10 +20,6 @@ input[type=button]{
 #list-element:hover{
     border-color: gray;
     background-color: gray;
-}
-
-#list-element{
-    border-color: white;
 }
 
 #deck-headers{
@@ -45,6 +45,15 @@ input[type=button]{
     color: black;
 }
 
+#deck-button:disabled {
+    color:white;
+    background-color: white;
+}
+
+#deck-button:disabled:hover{
+    transform: scale(1);
+}
+
 button + button{
     margin-left: 15px;
 }
@@ -53,7 +62,7 @@ li{
     user-select: none;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: inline block;
-    border: 1px solid #000;
+    border: 1px solid white;
     padding: 20px;
     border-radius: 15px;
 }
@@ -70,4 +79,15 @@ button:hover{
 
 div{
     padding: 10px;
+}
+
+#new-deck-text{
+    margin-left: 10px;
+    margin-right: 20px;
+    background-color: white;
+    border-radius: 20px;
+    min-height: 50px;
+    min-width: 200px;
+    color: black;
+    padding: 5px;
 }

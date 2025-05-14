@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import DeckService from "../services/deck_service";
+import QuestionService from "../services/question_service";
 import { response } from 'express';
 import res from 'express/lib/response';
 import tailwindcss from '@tailwindcss/vite';
@@ -48,7 +49,15 @@ function DeckList({currentUserId, setComponent, setCurrentDeckId, setCurrentUser
         });
     }
 
+    // must remove questions from deck first
     function handleDelete(){
+        QuestionService.deleteQuestionsFromDeck(currentDeckId)
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((e) => {
+            console.log(e);
+        })
         DeckService.remove(currentDeckId)
         .then((response) => {
             setSelectedIndex(-1);
@@ -78,7 +87,7 @@ function DeckList({currentUserId, setComponent, setCurrentDeckId, setCurrentUser
             <div id='deck-list'>
                 <ul role="list">
                     {decks.map((deck, index) => 
-                        <li id="list-element" key={deck.deck_id}
+                        <li key={deck.deck_id}
                             className={selectedIndex === index ? "selected" : "unselected"}
                             onClick={() => handleDeckSelection(index, deck.deck_id)}
                         >
@@ -102,8 +111,8 @@ function DeckList({currentUserId, setComponent, setCurrentDeckId, setCurrentUser
             {showDeckCreation ? 
             <div id='new-deck-container' className="flex flex-row">
                 <form>
-                    <label>Deck Name:</label>
-                    <input type="text" onChange={(e) => setNewDeckName(e.target.value)}></input>
+                    <label className="text-medium">Deck Name:</label>
+                    <input id='new-deck-text' type="text" onChange={(e) => setNewDeckName(e.target.value)}></input>
                     <input id='new-deck-input' type="button" value="Create Deck" onClick={handleNew}/>
                     <input id='new-deck-input' type="button" value="Cancel" onClick={() => setShowDeckCreation(false)}/>
                 </form>

@@ -4,6 +4,22 @@ h1 h2{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-input[type=text]{
-    
+.selected{
+    background-color: gray;
+}
+
+button:disabled {
+    color:white;
+    background-color: white;
+}
+
+#input-text{
+    background-color: white;
+    margin: 5px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    min-height: 40px;
+    min-width: 500px;
+    color: black;
+    padding: 5px;
 }
